@@ -1,0 +1,33 @@
+version: '3.9'
+
+services: 
+  mongodb: 
+    image: mongo
+    container_name: mongodb
+    ports: 
+      - "27017:27017"
+    networks: 
+      - chat_app_network
+    volumes:
+      - database_mongo:/data/db
+
+  api: 
+    build: 
+      context: ./backend
+    container_name: chat_api
+    command: npm run dev
+    volumes: 
+      - ./backend:/app
+      - /app/node_modules
+    ports: 
+      - "3000:3000"
+    depends_on: 
+      - mongodb
+    environment: 
+      - MONGO_URL=mongodb://mongodb:27017/chat_app_db
+
+networks: 
+  chat_app_network: 
+
+volumes: 
+  database_mongo:
