@@ -3,3 +3,7 @@
 /**/dist
 /**/.env
 /.idea/*
+note.txt
+compose.yaml
+/**/Dockerfile*
+/**/.dockerignore
